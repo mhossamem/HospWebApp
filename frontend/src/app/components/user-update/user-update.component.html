@@ -1,0 +1,56 @@
+<div>
+    <div class="d-flex justify-content-around">
+        <div class="p-2 border rounded shadow">
+            <form [formGroup]="updatedUserForm" class="input-form d-flex flex-column justify-content-center">
+                <h1 style="text-align: center;">User Update</h1>
+                <mat-form-field class="input-border p-3">
+                    <input matInput placeholder="First Name" formControlName="firstName" #firstName>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="input-border p-3">
+                    <input matInput placeholder="Last Name" formControlName="lastName" #lastName>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="input-border p-3">
+                    <input matInput placeholder="Email Address" formControlName="email" #email>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="input-border p-3" *ngIf="this.currUser.isAdmin">
+                    <mat-select placeholder="Hospital" [(value)]="selectedHosp">
+                        <mat-option *ngFor="let hospital of hospitalList" value="{{hospital}}">{{hospital}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="input-border p-3">
+                    <input matInput placeholder="Contact Number (+966)" formControlName="contactInfo" #contactInfo>
+                </mat-form-field>
+                <br><br>
+                <button type="submit" mat-button class="mainbtn p-3" (click)="updateU()"
+                    [disabled]="updatedUserForm.invalid">Update User Details
+                </button>
+            </form>
+        </div>
+        <div class="p-2 border rounded shadow">
+            <form [formGroup]="updatedPassForm" class="input-form">
+                <h1 style="text-align: center;">Change Password</h1>
+                <mat-form-field class="input-border p-3">
+                    <input matInput placeholder="New Password" [type]="hide ? 'password' : 'text'"
+                        formControlName="password" #password>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-hint *ngIf="!passwordInput.value">Enter password</mat-hint>
+                </mat-form-field>
+                <br>
+                <mat-form-field class="input-border p-3">
+                    <input matInput placeholder="Confirm New Password" [type]="hide ? 'password' : 'text'"
+                        formControlName="confirmPassword" #confirmPassword>
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-hint *ngIf="!passwordconfirmInput.value">Enter password confirmation</mat-hint>
+                </mat-form-field>
+                <button type="submit" mat-button class="mainbtn p-3" (click)="updatePass()"
+                    [disabled]="updatedPassForm.pristine || updatedPassForm.invalid">Change Password
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

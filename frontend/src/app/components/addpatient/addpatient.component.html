@@ -1,0 +1,586 @@
+<div>
+    <br>
+    <mat-card>
+        <form [formGroup]="createForm" class="create-form">
+            <mat-horizontal-stepper [linear]=true #stepper>
+                <mat-step>
+                    <ng-template matStepLabel>Patient Personal Details</ng-template>
+                    <mat-divider></mat-divider>
+                    <br>
+                    <mat-form-field class="inputfield" *ngIf="this.currUser.isAdmin">
+                        <mat-select placeholder="Hospital" formControlName="Hospital" #Hospital>
+                            <mat-option *ngFor="let hospital of hospitalList" value="{{hospital}}">{{hospital}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="Full Name" formControlName="fullName" #fullName>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="Full Name (Arabic)" formControlName="fullNameAr" #fullNameAr>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <mat-select placeholder="Gender" formControlName="Gender" #Gender>
+                            <mat-option value="Male">Male</mat-option>
+                            <mat-option value="Female">Female</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="Age" formControlName="Age" #Age>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <mat-select placeholder="Nationality" formControlName="Nationality" #Nationality>
+                            <mat-option *ngFor="let country of countryList" value="{{country}}">{{country}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="National ID" formControlName="n_ID" #n_ID>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="Contact Number (+966)" formControlName="contactInfo" #contactInfo>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="Blood Group" formControlName="bldGrp" #bldGrp>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="Height (cm)" formControlName="Height" #Height>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="Known Allergies" formControlName="kAllergies" #kAllergies>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="Submitted By" formControlName="submittedBy" #submittedBy>
+                    </mat-form-field>
+                    <div>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </mat-step>
+                <br><br>
+                <mat-step>
+                    <ng-template matStepLabel>Medical History</ng-template>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Start of Dialysis</mat-label>
+                        <input matInput [matDatepicker]="dosDialysis" formControlName="dosDialysis">
+                        <mat-datepicker-toggle matSuffix [for]="dosDialysis"></mat-datepicker-toggle>
+                        <mat-datepicker #dosDialysis></mat-datepicker>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <mat-select name="oKidneyDisease" placeholder="Original Kidney Disease" formControlName="oKidneyDisease" #oKidneyDisease>
+                            <mat-option value="Unknown">Unknown</mat-option>
+                            <mat-option value="Hypertensive Nephrosclerosis">Hypertensive Nephrosclerosis</mat-option>
+                            <mat-option value="Diabetic Nephropathy">Diabetic Nephropathy</mat-option>
+                            <mat-option value="Obstructive Nephropathy">Obstructive Nephropathy</mat-option>
+                            <mat-option value="ADPKD">ADPKD</mat-option>
+                            <mat-option value="Other">Other</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="this.createForm.controls.oKidneyDisease.value == 'Other'" class="inputfield">
+                        <input matInput placeholder="Specified Disease" formControlName="otherKD"
+                            #otherKD>
+                    </mat-form-field>
+                    <br>
+                        <div>
+                            <h4>Co-Morbidities:</h4>
+                            <mat-checkbox labelPosition="before" [checked]="cMorbDM"
+                            (change)="cMorbDM = !cMorbDM">Diabetes Mellitus</mat-checkbox>
+                            <br>
+                            <mat-checkbox labelPosition="before" [checked]="cMorbHyp"
+                            (change)="cMorbHyp = !cMorbHyp">Hypertension</mat-checkbox>
+                            <br>
+                            <mat-checkbox labelPosition="before" [checked]="cMorbIHD"
+                            (change)="cMorbIHD = !cMorbIHD">IHD</mat-checkbox>
+                            <br>
+                            <mat-checkbox labelPosition="before"[checked]="cMorbE"
+                            (change)="cMorbE = !cMorbE">Epilepsy</mat-checkbox>
+                            <br>
+                            <mat-checkbox labelPosition="before" [checked]="SelectedCMorbOther"
+                                (change)="SelectedCMorbOther = !SelectedCMorbOther">Other
+                            </mat-checkbox>
+                            <br>
+                            <mat-form-field class="inputfield" *ngIf="SelectedCMorbOther">
+                                <input matInput placeholder="Other Co-Morbidities" formControlName="coMorbidityOther"
+                                    #coMorbidityOther>
+                            </mat-form-field>
+                        </div>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <mat-select name="previousTr" placeholder="Previous Transplantation" formControlName="previousTr" #previousTr>
+                                <mat-option value="No">No</mat-option>
+                                <mat-option value="Yes">Yes (Graft Survival)</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="this.createForm.controls.previousTr.value == 'Yes'">
+                            <input matInput placeholder="Graft Survival" formControlName="prevTrGS" #prevTrGS>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <mat-select name="fitForTr" placeholder="Fit for Transplantation" formControlName="fitForTr" #fitForTr>
+                                <mat-option value="Yes">Yes</mat-option>
+                                <mat-option value="No">No</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <mat-form-field *ngIf="this.createForm.controls.fitForTr.value == 'No'" class = "hiddeninputfield">
+                            <input matInput placeholder="Reason" formControlName="fitForTrReason" #fitForReason>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <mat-select name="potentialRDonors" placeholder="Potiential Relative Donors"
+                                formControlName="potentialRDonors" #potentialRDonors>
+                                <mat-option value="Yes">Yes</mat-option>
+                                <mat-option value="No">No</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                        <div>
+                            <button mat-button matStepperPrevious>Back</button>
+                            <button mat-button matStepperNext>Next</button>
+                        </div>
+
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Vascular Access</ng-template>
+                    <mat-form-field class="inputfield">
+                        <mat-select name="currentAccess" placeholder="Current Access"
+                            formControlName="currentAccess" #currentAccess>
+                            <mat-option value="AVF/Side/Rt.">Rt./AVF</mat-option>
+                            <mat-option value="AVF/Side/Lt.">Lt./AVF</mat-option>
+                            <mat-option value="AVF/Site/Radio-ulnar">Radio-ulnar/AVF</mat-option>
+                            <mat-option value="AVF/Site/Brachio-cephal">Brachio-cephal/AVF</mat-option>
+                            <mat-option value="AVG/Side/Rt.">Rt./AVG</mat-option>
+                            <mat-option value="AVG/Side/Lt.">Lt./AVG</mat-option>
+                            <mat-option value="AVG/Site/Forearm">Forearm/AVG</mat-option>
+                            <mat-option value="AVG/Site/Upperarm">Upperarm/AVG</mat-option>
+                            <mat-option value="AVG/Site/Lower-limb">Lower Limb/AVG</mat-option>
+                            <mat-option value="AVG/Site/Chest">Chest/AVG</mat-option>
+                            <mat-option value="Permcath/Side/Rt.">Rt./Permcath</mat-option>
+                            <mat-option value="Permcath/Side/Lt.">Lt./Permcath</mat-option>
+                            <mat-option value="Permcath/Site/Int.Jugul">Int. Jugul/Permcath</mat-option>
+                            <mat-option value="Permcath/Site/Subclavia">Subclavia/Permcath</mat-option>
+                            <mat-option value="Permcath/Site/Femoral">Femoral/Permcath</mat-option>
+                            <mat-option value="Permcath/Site/Transhepatic">Transhepatic/Permcath</mat-option>
+                            <mat-option value="Other">Other</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field *ngIf="this.createForm.controls.currentAccess.value =='Other'" class="inputfield">
+                        <input matInput placeholder="Specified Access" formControlName="cAOther" #cAOther>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field appearance="fill">
+                        <mat-label>Date of Access Creation</mat-label>
+                        <input matInput [matDatepicker]="dOfAccessCreation" formControlName="dOfAccessCreation">
+                        <mat-datepicker-toggle matSuffix [for]="dOfAccessCreation"></mat-datepicker-toggle>
+                        <mat-datepicker #dOfAccessCreation></mat-datepicker>
+                    </mat-form-field>
+                    <br>
+                    <div>
+                        <h4>Complications:</h4>
+                        <mat-checkbox labelPosition="before" [checked]="CompIns"
+                        (change)="CompIns = !CompIns">Insufficiency</mat-checkbox>
+                        <br>
+                        <mat-checkbox labelPosition="before" [checked]="CompInf"
+                        (change)="CompInf = !CompInf">Infection</mat-checkbox>
+                        <br>
+                        <mat-checkbox labelPosition="before" [checked]="CompAD"
+                        (change)="CompAD = !CompAD">Aneurysmal Dilatation</mat-checkbox>
+                        <br>
+                        <mat-checkbox labelPosition="before" [checked]="CompDC"
+                        (change)="CompDC = !CompDC">Difficult Cannulation</mat-checkbox>
+                        <br>
+                        <mat-checkbox labelPosition="before" [checked]="SelectedCompOther"
+                            (change)="SelectedCompOther = !SelectedCompOther">Other</mat-checkbox>
+                        <br>
+                        <mat-form-field *ngIf="SelectedCompOther">
+                            <input matInput placeholder="Other Complications" formControlName="ComplicationOther"
+                                #ComplicationOther>
+                        </mat-form-field>
+                    </div>
+                    <br>
+                    <h4>Previous Access(es):</h4>
+                    <mat-divider></mat-divider>
+                    <mat-form-field class="inputfield">
+                        <input matInput formControlName="previousAccess1"
+                            #previousAccess1>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput formControlName="previousAccess2"
+                            #previousAccess2>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput formControlName="previousAccess3"
+                            #previousAccess3>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput formControlName="previousAccess4"
+                            #previousAccess4>
+                    </mat-form-field>
+                    <br><br>
+                     <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                     </div>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Dialysis Prescription</ng-template>
+                    <mat-divider></mat-divider>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="Frequency (sessions/week)" formControlName="Frequency" #Frequency>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="Duration (hrs/session)" formControlName="Duration" #Duration>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="Dialyser" formControlName="Dialyser" #Dialyser>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class ="inputfield">
+                        <mat-select name="antiCoagulation" placeholder="Anticoagulation"
+                                formControlName="antiCoag" #antiCoag>
+                                <mat-option value="Heparin">Yes (Heparin)</mat-option>
+                                <mat-option value="LMWH">Yes (LMWH)</mat-option>
+                                <mat-option value="No">No</mat-option>
+                            </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="inputfield" *ngIf="this.createForm.controls.antiCoag.value == 'Heparin'">
+                        <input matInput placeholder="Initial" formControlName="hInit" #hInit>
+                    </mat-form-field>
+                    <mat-form-field class="inputfield" *ngIf="this.createForm.controls.antiCoag.value == 'Heparin'">
+                        <input matInput placeholder="Maintenance" formControlName="hMaint" #hMaint>
+                    </mat-form-field>
+                    <mat-form-field class="inputfield" *ngIf="this.createForm.controls.antiCoag.value == 'LMWH'">
+                        <input matInput placeholder="LMWH Dosage" formControlName="LMWHval" #LMWHval>
+                    </mat-form-field>
+                    <mat-form-field class="inputfield" *ngIf="this.createForm.controls.antiCoag.value == 'No'">
+                        <input matInput placeholder="Reason" formControlName="antiCoReason" #antiCoReason>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="Dry Weight (kg)" formControlName="dryWt" #dryWt>
+                    </mat-form-field>
+                    <br>
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="Average Weight Gain (between sessions)" formControlName="avgWtGain"
+                            #avgWtGain>
+                    </mat-form-field>
+                    <br>        
+                    <mat-form-field class="inputfield">
+                        <input matInput placeholder="Dialysis Adequacy (Kt/V)" formControlName="dialAdeq" #dialAdeq>
+                    </mat-form-field>
+                    <br><br>
+                    <div>
+                        <h4>Dialysis Complications:</h4>
+                        <mat-checkbox labelPosition="before" [checked]="DCHA"
+                        (change)="DCHA = !DCHA">Headache</mat-checkbox>
+                        <br>
+                        <mat-checkbox labelPosition="before" [checked]="DCHypot"
+                        (change)="DCHypot = !DCHypot">Hypotension</mat-checkbox>
+                        <br>
+                        <mat-checkbox labelPosition="before" [checked]="DCHypog"
+                        (change)="DCHypog = !DCHypog">Hypoglycemia</mat-checkbox>
+                        <br>
+                        <mat-checkbox labelPosition="before" [checked]="DCHyper"
+                        (change)="DCHyper = !DCHyper">Hypertension</mat-checkbox>
+                        <br>
+                        <mat-checkbox labelPosition="before" [checked]="DCMC"
+                        (change)="DCMC = !DCMC">Muscle Cramps</mat-checkbox>
+                        <br>
+                        <mat-checkbox labelPosition="before" [checked]="DCAC"
+                        (change)="DCAC = !DCAC">Abdominal Colic</mat-checkbox>
+                        <br>
+                        <mat-checkbox labelPosition="before" [checked]="DCV"
+                        (change)="DCV = !DCV">Vomiting</mat-checkbox>
+                        <br>
+                        <mat-checkbox labelPosition="before" [checked]="DCSZ"
+                        (change)="DCSZ = !DCSZ">Seizure</mat-checkbox>
+                        <br>
+                        <mat-checkbox labelPosition="before" [checked]="DCHS"
+                        (change)="DCHS = !DCHS">Hypersensitivity</mat-checkbox>
+                        <br>
+                        <mat-checkbox labelPosition="before" [checked]="DCIH"
+                        (change)="DCIH = !DCIH">Itching</mat-checkbox>
+                        <br>
+                        <mat-checkbox labelPosition="before" [checked]="SelectedDCOther"
+                            (change)="SelectedDCOther = !SelectedDCOther">
+                            Other</mat-checkbox>
+                        <br>
+                        <mat-form-field *ngIf="SelectedDCOther">
+                            <input matInput placeholder="Other Dialysis Complications" formControlName="dCompOther"
+                                #dCompOther>
+                        </mat-form-field>
+                    </div>
+                    <br>
+                    <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Lab Results:</ng-template>
+                    <div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Lab Results Date</mat-label>
+                            <input matInput [matDatepicker]="labDate" formControlName="labDate">
+                            <mat-datepicker-toggle matSuffix [for]="labDate"></mat-datepicker-toggle>
+                            <mat-datepicker #labDate></mat-datepicker>
+                        </mat-form-field>
+                        <h4>CBC:</h4>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="HB (g/dl)" formControlName="cbcHB" #cbcHB>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="WBC" formControlName="cbcWBC" #cbcWBC>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="Platelets" formControlName="cbcPlatelets" #cbcPlatelets>
+                        </mat-form-field>
+                        <br>
+                    </div>
+                    <div>
+                        <h4>Chemistry:</h4>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="S. Creatinine (mg%)" formControlName="chemCre" #chemCre>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="S. Urea (mg%)" formControlName="chemUrea" #chemUrea>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="S. Sodium (mmoL/L)" formControlName="chemSod" #chemSod>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="S. Potassium (mmoL/L)" formControlName="chemPot" #chemSod>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="S. Calcium (mg%)" formControlName="chemCal" #chemSod>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="S. Phosphorus (mg%)" formControlName="chemPhos" #chemPhos>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="S. Magnesium (mg%)" formControlName="chemMag" #chemMag>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="S. Albumin (mg%)" formControlName="chemAlb" #chemAlb>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="AST (U/L)" formControlName="chemAST" #chemAST>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="ALT (U/L)" formControlName="chemALT" #chemALT>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="Alk. Phosphatase (U/L)" formControlName="chemAlph" #chemAlph>
+                        </mat-form-field>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="Other" formControlName="chemOther" #chemOther>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <h4>Serology:</h4>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <mat-select name="hbsAg" placeholder="HBs Ag" formControlName="hbsAg" #hbsAg>
+                                <mat-option value="Positive">Positive</mat-option>
+                                <mat-option value="Negative">Negative</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <mat-select name="hcvAb" placeholder="HCV Ab" formControlName="hcvAb" #hcvAb>
+                                <mat-option value="Positive">Positive</mat-option>
+                                <mat-option value="Negative">Negative</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <mat-select name="hivI_II" placeholder="HIV I & II" formControlName="hivI_II" #hivI_II>
+                                <mat-option value="Positive">Positive</mat-option>
+                                <mat-option value="Negative">Negative</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="Other" formControlName="otherSer" #otherSer>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <h4>Iron Profile:</h4>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="S. Iron (umol/L)" formControlName="Siron" #Siron>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="S. Ferritin (ng/mL)" formControlName="Sferitin" #Sferitin>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="TIBC (umol/L)" formControlName="TIBC" #TIBC>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <h4>Coagulation:</h4>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="PT (sec)" formControlName="coagPT" #coagPT>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="PPT (sec)" formControlName="coagPPT" #coagPPT>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="INR" formControlName="coagINR" #coagINR>
+                        </mat-form-field>
+                        <br>
+                    </div>
+                    <div>
+                        <h4>Hormones:</h4>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="PTH (Pmol/L)" formControlName="hormPTH" #hormPTH>
+                        </mat-form-field>
+                        <br>
+                        <mat-form-field class="inputfield">
+                            <input matInput placeholder="Vitamin D (ng/L)" formControlName="hormVITD" #hormVITD>
+                        </mat-form-field>
+                        <br>
+                    </div>
+                    <div>
+                        <button mat-button matStepperPrevious>Back</button>
+                        <button mat-button matStepperNext>Next</button>
+                    </div>
+                    </mat-step>
+                    <mat-step>
+                        <ng-template matStepLabel>Current Medication</ng-template>
+                        <div>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 1" formControlName="cMD1" #cMD1>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 2" formControlName="cMD2" #cM2>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 3" formControlName="cMD3" #cMD3>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 4" formControlName="cMD4" #cMD4>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 5" formControlName="cMD5" #cMD5>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 6" formControlName="cMD6" #cMD6>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 7" formControlName="cMD7" #cMD7>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 8" formControlName="cMD8" #cMD8>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 9" formControlName="cMD9" #cMD9>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 10" formControlName="cMD10" #cMD10>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 11" formControlName="cMD11" #cMD11>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 12" formControlName="cMD12" #cMD12>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 13" formControlName="cMD13" #cMD13>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 14" formControlName="cMD14" #cMD14>
+                            </mat-form-field>
+                            <br>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 15" formControlName="cMD15" #cMD15>
+                            </mat-form-field>
+                            <mat-form-field class="inputfield">
+                                <input matInput placeholder="Medication 16" formControlName="cMD16" #cMD15>
+                            </mat-form-field>
+                            <mat-form-field class ="inputfield">
+                                <mat-select name="HepBV" placeholder="Hep. B Vaccination"
+                                        formControlName="HepBV" #HepBV>
+                                        <mat-option value="Yes">Yes</mat-option>
+                                        <mat-option value="No">No</mat-option>
+                                    </mat-select>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" *ngIf="this.createForm.controls.HepBV.value=='Yes'">
+                                <mat-label>Vaccination Date</mat-label>
+                                <input matInput [matDatepicker]="HepBVDate" formControlName="HepBVDate">
+                                <mat-datepicker-toggle matSuffix [for]="HepBVDate"></mat-datepicker-toggle>
+                                <mat-datepicker #HepBVDate></mat-datepicker>
+                            </mat-form-field>
+                            <mat-form-field class ="inputfield">
+                                <mat-select name="InfV" placeholder="Influenza Vaccination"
+                                        formControlName="InfV" #InfV>
+                                        <mat-option value="Yes">Yes</mat-option>
+                                        <mat-option value="No">No</mat-option>
+                                    </mat-select>
+                            </mat-form-field>
+                            <mat-form-field appearance="fill" *ngIf="this.createForm.controls.InfV.value=='Yes'">
+                                <mat-label>Vaccination Date</mat-label>
+                                <input matInput [matDatepicker]="InfVDate" formControlName="InfVDate">
+                                <mat-datepicker-toggle matSuffix [for]="InfVDate"></mat-datepicker-toggle>
+                                <mat-datepicker #InfVDate></mat-datepicker>
+                            </mat-form-field>
+                            <mat-divider></mat-divider>
+                            <br><br>
+                            <button class="mainbtn" type="submit" (click)="addp()"
+                                [disabled]="createForm.pristine || createForm.invalid" mat-raised-button color="primary">Add
+                                new
+                                medical profile
+                            </button>
+                        </div>
+                    </mat-step>
+            </mat-horizontal-stepper>
+        </form>
+    </mat-card>
+</div>

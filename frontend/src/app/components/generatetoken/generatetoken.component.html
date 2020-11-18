@@ -1,0 +1,15 @@
+<div *ngIf="this.currUser.isAdmin">
+    <mat-card>
+        <mat-form-field>
+            <mat-select [(value)]="selectedHosp" placeholder="Select Hospital for user" required>
+                <mat-option *ngFor="let hospital of hospitalList" value="{{hospital}}">{{hospital}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <br><br>
+        <button mat-button color="primary" *ngIf="this.selectedHosp" type="submit" (click)="addinvT_Admin()">Generate Administrator</button>
+        <button mat-button color="primary" *ngIf="this.selectedHosp" type="submit" (click)="addinvT()">Generate Regular User</button>
+   
+        <br><br>
+        <mat-label *ngIf="this.currinvT.token">localhost:4200/register/{{this.currinvT.token}}</mat-label>
+    </mat-card>
+</div>

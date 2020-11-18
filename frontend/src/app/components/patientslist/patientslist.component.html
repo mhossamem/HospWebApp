@@ -1,0 +1,66 @@
+<div class="d- flex justify-content-center">
+    <br>
+    <mat-card class="shadow">
+        <div d-flex justify-content-start>
+            <form [formGroup]="searchForm" class="search-form p-2">
+                <mat-form-field class="search-field">
+                    <input matInput placeholder="Search" formControlName="searchInp" #searchInp>
+                </mat-form-field>
+                <mat-form-field class="search-critera">
+                    <mat-select placeholder="Criteria" formControlName="searchCrit" #searchCrit>
+                        <mat-option value="n_ID">National ID</mat-option>
+                        <mat-option value="fullNameAr">الاسم</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-button class="search-button p-0" type="submit" (click)="fetchP()">Search</button>
+                <button mat-button class="search-button p-0" (click)="clearSearch()">Clear</button>
+            </form>
+        </div>
+        <mat-divider></mat-divider>
+        <br><br><br>
+        <table class="table table-sm table-light">
+            <thead>
+                <tr class="table-primary">
+                    <th class=th-primary scope="col">Hospital</th>
+                    <th class=th-primary scope="col">Full Name</th>
+                    <th class=th-primary scope="col">الاسم الكامل</th>
+                    <th class=th-primary scope="col">Gender</th>
+                    <th class=th-primary scope="col">Age</th>
+                    <th class=th-primary scope="col">Submitted By</th>
+                    <th class=th-primary scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="this.currPatient">
+                    <th class="table-element" scope="row">{{this.currPatient.Hospital}}</th>
+                    <td class="table-element">{{this.currPatient.fullName}}</td>
+                    <td class="table-element">{{this.currPatient.fullNameAr}}</td>
+                    <td class="table-element">{{this.currPatient.Gender}}</td>
+                    <td class="table-element">{{this.currPatient.Age}}</td>
+                    <td class="table-element">{{this.currPatient.submittedBy}}</td>
+                    <td class="table-element d-flex justify-content-around">
+                        <button mat-button class="option-button p-0"
+                            (click)="viewPatient(this.currPatient._id)">View</button>
+                        <button mat-button class="option-button p-0" [disabled]="IsUserAuthorized()"
+                            (click)="updatePatient(this.currPatient._id)">Update</button>
+                        <button mat-button class="option-button p-0" [disabled]="IsUserAuthorized()"
+                            (click)="deletePatient(this.currPatient._id)">Delete</button>
+                    </td>
+                </tr>
+                <tr *ngFor="let s of HospPatients">
+                    <th class="table-element" scope="row" *ngIf="s.Hospital">{{s.Hospital}}</th>
+                    <td class="table-element" *ngIf="s.fullName">{{s.fullName}}</td>
+                    <td class="table-element" *ngIf="s.fullNameAr">{{s.fullNameAr}}</td>
+                    <td class="table-element" *ngIf="s.Gender">{{s.Gender}}</td>
+                    <td class="table-element" *ngIf="s.Age">{{s.Age}}</td>
+                    <td class="table-element" *ngIf="s.submittedBy">{{s.submittedBy}}</td>
+                    <td class="table-element d-flex justify-content-around" *ngIf="s">
+                        <button mat-button class="option-button p-1" (click)="viewPatient(s._id)">View</button>
+                        <button mat-button class="option-button p-1" (click)="updatePatient(s._id)">Update</button>
+                        <button mat-button class="option-button p-1" (click)="deletePatient(s._id)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </mat-card>
+</div>

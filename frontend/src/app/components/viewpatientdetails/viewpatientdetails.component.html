@@ -1,0 +1,252 @@
+<div class="card-PD">
+    <br><br>
+    <h2 class="card-title">Personal Details</h2>
+    <mat-divider class="matdiv-color"></mat-divider>
+    <br><br>
+    <mat-label class="info-label">{{this.currPatient.fullName}},</mat-label>
+    <mat-label class="info-label">{{this.currPatient.Age}},</mat-label>
+    <mat-label class="info-label">{{this.currPatient.Gender}},</mat-label>
+    <mat-label class="info-label">{{this.currPatient.Nationality}},</mat-label>
+    <mat-label class="info-label">(+966) {{this.currPatient.contactInfo}}</mat-label>
+    <br><br>
+    <mat-label class="info-label"> <b>Hospital</b>: {{this.currPatient.Hospital}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">{{this.currPatient.Height}} cm</mat-label>
+    <br><br>
+    <mat-label class="info-label">Blood Group: {{this.currPatient.bldGrp}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">Known Allergies: {{this.currPatient.kAllergies}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">{{this.currPatient.n_ID}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">Submitted By: {{this.currPatient.submittedBy}}</mat-label>
+</div>
+
+<!---Medical History SECTION--->
+
+<div class="card-expanel">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                Medical History
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <br><br>
+        <mat-card-subtitle class="card-subtitle">Start of Dialysis</mat-card-subtitle>
+        <mat-label class="info-label">{{this.dofDialysis}}</mat-label>
+        <br><br><br>
+        <mat-card-subtitle class="card-subtitle">Original Kidney Disease</mat-card-subtitle>
+        <mat-label class="info-label">{{this.currPatient.oKidneyDisease}}</mat-label>
+        <mat-label class="info-label">{{this.currPatient.otherKD}}</mat-label>
+        <br><br><br>
+        <mat-card-subtitle class="card-subtitle">Co-Morbidities</mat-card-subtitle>
+        <mat-label *ngIf="this.currPatient.morbHype" class="info-label">Hypertension</mat-label>
+        <mat-label *ngIf="this.currPatient.morbDM" class="info-label">Diabetes Mellitus</mat-label>
+        <mat-label *ngIf="this.currPatient.morbEpi" class="info-label">Epilepsy</mat-label>
+        <mat-label class="info-label">{{this.currPatient.coMorbOther}}</mat-label>
+        <br><br>
+        <mat-card-subtitle class="card-subtitle">Previous Transplantation</mat-card-subtitle>
+        <mat-label class="info-label">{{this.currPatient.previousTr}}</mat-label>
+        <mat-label class="info-label">{{this.currPatient.prevTrGS}}</mat-label>
+        <br><br><br>
+        <mat-card-subtitle class="card-subtitle">Fit for Transplantation</mat-card-subtitle>
+        <mat-label class="info-label">{{this.currPatient.fitForTr}}</mat-label>
+        <mat-label class="info-label">{{this.currPatient.fitForTrReason}}</mat-label>
+        <br><br><br>
+        <mat-card-subtitle class="card-subtitle">Potential Relative Donors</mat-card-subtitle>
+        <mat-label class="info-label">{{this.currPatient.potentialRDonors}}</mat-label>
+    </mat-expansion-panel>
+</div>
+
+
+<!----START OF VASC ACCESS SECTION-->
+
+
+
+<!--<mat-card>
+    <br><br>
+    <mat-card-subtitle class="card-subtitle">Current Access</mat-card-subtitle>
+    <mat-card>
+        <mat-label class="info-label">{{this.currPatient.currentAccess}}</mat-label>
+        <mat-label class="info-label">{{this.currPatient.cAOther}}</mat-label>
+    </mat-card>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">Complications</mat-card-subtitle>
+    <mat-card>
+        <mat-label *ngIf="this.currPatient.compInsuf" class="info-label">Insufficiency,</mat-label>
+        <mat-label *ngIf="this.currPatient.compInf" class="info-label">Infection,</mat-label>
+        <mat-label *ngIf="this.currPatient.compAD" class="info-label">Aneurysmal Dilatation,</mat-label>
+        <mat-label *ngIf="this.currPatient.compDC" class="info-label">Diffcult Cannulation,</mat-label>
+        <mat-label class="info-label">{{this.currPatient.compOther}}</mat-label>
+    </mat-card>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">Previous Access(es)</mat-card-subtitle>
+    <mat-card>
+        <mat-label class="info-label">{{this.currPatient.previousAccess1}}</mat-label>
+        <mat-label class="info-label">{{this.currPatient.previousAccess2}}</mat-label>
+        <mat-label class="info-label">{{this.currPatient.previousAccess3}}</mat-label>
+        <mat-label class="info-label">{{this.currPatient.previousAccess4}}</mat-label>
+    </mat-card>
+</mat-card>
+<mat-card>
+    <br><br>
+    <mat-card-subtitle class="card-subtitle">Frequency (per week)</mat-card-subtitle>
+    <mat-card>
+        <mat-label class="info-label">{{this.currPatient.Frequency}}</mat-label>
+    </mat-card>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">Duration (hours per session)</mat-card-subtitle>
+    <mat-card>
+        <mat-label class="info-label">{{this.currPatient.Duration}}</mat-label>
+    </mat-card>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">Dialyser</mat-card-subtitle>
+    <mat-card>
+        <mat-label class="info-label">{{this.currPatient.Dialyser}}</mat-label>
+    </mat-card>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">Anticoagulation</mat-card-subtitle>
+    <div *ngIf="this.currPatient.antiCoagulation=='Heparin'">
+        <mat-card>
+            <mat-label class="info-label">Initial: {{this.currPatient.hInit}}</mat-label>
+            <mat-label class="info-label">Maintenance: {{this.currPatient.hMaint}}</mat-label>
+        </mat-card>
+    </div>
+    <div *ngIf="this.currPatient.antiCoagulation=='LMWH'">
+        <mat-card>
+            <mat-label class="info-label">LMWH: {{this.currPatient.LMWHval}}</mat-label>
+        </mat-card>
+    </div>
+    <div *ngIf="this.currPatient.antiCoagulation=='No'">
+        <mat-card>
+            <mat-label class="info-label">No, Reason: {{this.currPatient.antiCoReason}}</mat-label>
+        </mat-card>
+    </div>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">Dry Weight (kg)</mat-card-subtitle>
+    <mat-card>
+        <mat-label class="info-label">{{this.currPatient.dryWeight}}</mat-label>
+    </mat-card>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">Average Weight Gain</mat-card-subtitle>
+    <mat-card>
+        <mat-label class="info-label">{{this.currPatient.averageWeightGain}}</mat-label>
+    </mat-card>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">Dialysis Adequacy (Kt/V)</mat-card-subtitle>
+    <mat-card>
+        <mat-label class="info-label">{{this.currPatient.dialAdeq}}</mat-label>
+    </mat-card>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">Dialysis Complications</mat-card-subtitle>
+    <mat-card>
+        <mat-label *ngIf="this.currPatient.dCompHead" class="info-label">Headache</mat-label>
+        <mat-label *ngIf="this.currPatient.dCompHG" class="info-label">Hypoglycemia</mat-label>
+        <mat-label *ngIf="this.currPatient.dCompHOT" class="info-label">Hypotension</mat-label>
+        <mat-label *ngIf="this.currPatient.dCompHET" class="info-label">Hypertension</mat-label>
+        <mat-label *ngIf="this.currPatient.dCompMC" class="info-label">Muscle Cramps</mat-label>
+        <mat-label *ngIf="this.currPatient.dCompAC" class="info-label">Abdominal Colic</mat-label>
+        <mat-label *ngIf="this.currPatient.dCompVom" class="info-label">Vomiting</mat-label>
+        <mat-label *ngIf="this.currPatient.dCompSZ" class="info-label">Seizure</mat-label>
+        <mat-label *ngIf="this.currPatient.dCompHS" class="info-label">Hypersensitivity</mat-label>
+        <mat-label *ngIf="this.currPatient.dCompIt" class="info-label">Itching</mat-label>
+        <mat-label class="info-label">{{this.currPatient.dCompOther}}</mat-label>
+    </mat-card>
+</mat-card>
+<mat-card>
+    <mat-card-subtitle class="card-subtitle">Lab Results Date</mat-card-subtitle>
+    <mat-label class="info-label">{{this.currPatient.labDate.substring(0,10)}}</mat-label>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">CBC</mat-card-subtitle>
+    <mat-label class="info-label">HB: {{this.currPatient.cbcHB}}</mat-label>
+    <mat-label class="info-label">WBC: {{this.currPatient.cbcWBC}}</mat-label>
+    <mat-label class="info-label">Platelets: {{this.currPatient.cbcPlatelets}}</mat-label>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">Chemistry</mat-card-subtitle>
+    <mat-label class="info-label">S. Creatinine: {{this.currPatient.chemCre}}</mat-label>
+    <br>
+    <mat-label class="info-label">S. Urea: {{this.currPatient.chemUrea}}</mat-label>
+    <br>
+    <mat-label class="info-label">S. Sodium: {{this.currPatient.chemSod}}</mat-label>
+    <br>
+    <mat-label class="info-label">S. Potassium: {{this.currPatient.chemPot}}</mat-label>
+    <br>
+    <mat-label class="info-label">S. Calcium: {{this.currPatient.chemCal}}</mat-label>
+    <br>
+    <mat-label class="info-label">S. Phosphate: {{this.currPatient.chemPhos}}</mat-label>
+    <br>
+    <mat-label class="info-label">AST: {{this.currPatient.chemAST}}</mat-label>
+    <br>
+    <mat-label class="info-label">ALT: {{this.currPatient.chemALT}}</mat-label>
+    <br>
+    <mat-label class="info-label">S. Albumin: {{this.currPatient.chemAlb}}</mat-label>
+    <br>
+    <mat-label class="info-label">S. Magnesium: {{this.currPatient.chemMag}}</mat-label>
+    <br>
+    <mat-label class="info-label">Alkaline Phosphatase: {{this.currPatient.chemAlph}}</mat-label>
+    <br>
+    <mat-label class="info-label">Other: {{this.currPatient.chemOther}}</mat-label>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">Iron profile</mat-card-subtitle>
+    <mat-label class="info-label">S. Iron: {{this.currPatient.Siron}}</mat-label>
+    <mat-label class="info-label">TIBC: {{this.currPatient.TIBC}}</mat-label>
+    <mat-label class="info-label">S. Feritin: {{this.currPatient.Sferitin}}</mat-label>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">Hormone</mat-card-subtitle>
+    <mat-label class="info-label">PTH: {{this.currPatient.hormPTH}}</mat-label>
+    <mat-label class="info-label">Vitamin D: {{this.currPatient.hormVITD}}</mat-label>
+    <mat-label class="info-label">Other: {{this.currPatient.hormOther}}</mat-label>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">Serology</mat-card-subtitle>
+    <mat-label class="info-label">HBsAg: {{this.currPatient.hbsAg}}</mat-label>
+    <mat-label class="info-label">HCVAb: {{this.currPatient.hcvAb}}</mat-label>
+    <mat-label class="info-label">HIV I & II: {{this.currPatient.hivI_II}}</mat-label>
+    <mat-label class="info-label">Other: {{this.currPatient.othrSer}}</mat-label>
+    <br><br><br>
+    <mat-card-subtitle class="card-subtitle">Coagulation Profile</mat-card-subtitle>
+    <mat-label class="info-label">PT (seconds) : {{this.currPatient.coagPT}}</mat-label>
+    <mat-label class="info-label">PPT (seconds) : {{this.currPatient.coagPPT}}</mat-label>
+    <mat-label class="info-label">INR: {{this.currPatient.coagINR}}</mat-label>
+    <mat-label class="info-label">1- {{this.currPatient.cMD1}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">2- {{this.currPatient.cMD2}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">3- {{this.currPatient.cMD3}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">4- {{this.currPatient.cMD4}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">5- {{this.currPatient.cMD5}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">6- {{this.currPatient.cMD6}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">7- {{this.currPatient.cMD7}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">8- {{this.currPatient.cMD8}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">9- {{this.currPatient.cMD9}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">10- {{this.currPatient.cMD10}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">11- {{this.currPatient.cMD11}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">12- {{this.currPatient.cMD12}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">13- {{this.currPatient.cMD13}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">14- {{this.currPatient.cMD14}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">15- {{this.currPatient.cMD15}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">15- {{this.currPatient.cMD16}}</mat-label>
+    <br><br>
+    <mat-label class="info-label">Hepatitus B Vaccine<br> {{this.currPatient.HepBV}}</mat-label>
+    <div *ngIf="this.currPatient.HepBV=='Yes'">
+        <mat-label class="info-label">{{this.currPatient.HepBVDate.substring(0,10)}}</mat-label>
+    </div>
+    <br><br>
+    <mat-label class="info-label">Influenza Vaccine<br> {{this.currPatient.InfV}}</mat-label>
+    <div *ngIf="this.currPatient.InfV=='Yes'">
+        <mat-label class="info-label">{{this.currPatient.InfVDate.substring(0,10)}}</mat-label>
+    </div>
+    <br><br>
+</mat-card> --->

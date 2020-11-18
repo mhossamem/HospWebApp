@@ -1,0 +1,46 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="nav.visible">
+  <a class="navbar-brand">Hemodialysis Patient Manager</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Patients
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/list">List</a>
+          <a class="dropdown-item" routerLink="/add">Add record</a>
+        </div>
+      </li>
+      <li class="nav-item dropdown" *ngIf="isAdminAuthorized()">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          Admin Actions
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/gentoken">Generate registration link</a>
+          <a class="dropdown-item" routerLink="/userlist">User list</a>
+          <a class="dropdown-item" routerLink="/hospital">Hospitals</a>
+        </div>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown" >
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          My Account
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="/accountupdate">Update</a>
+          <a class="dropdown-item" routerLink="/account">Profile</a>
+          <a class="dropdown-item" routerLink="/login">Logout</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+</nav>

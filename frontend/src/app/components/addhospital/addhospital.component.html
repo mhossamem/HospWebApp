@@ -1,0 +1,8 @@
+<div>
+    <mat-card>
+        <mat-form-field>
+            <input matInput [(value)]="newHospital" placeholder="Hospital Name">
+        </mat-form-field>
+    </mat-card>
+    <button mat-button (click)="addHosp()" [disabled]="newHospital.length">Add</button>
+</div>

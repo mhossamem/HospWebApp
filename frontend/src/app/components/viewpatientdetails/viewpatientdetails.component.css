@@ -1,0 +1,51 @@
+.card-PD{
+    position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 250px;
+  max-height: 450px;
+  padding-left: 10%;
+  text-align: left;
+  box-shadow: 0 0 20px 0 #00000021, 0 5px 5px 0 #00000025;
+    
+}
+.card-expanel{
+    width: 60%;
+    position: absolute;
+    padding-left: 600px;
+    top:50%;
+}
+.card-subtitle{
+    font-size: 18px;
+    color:rgba(7, 78, 7, 0.562);
+
+}
+.card-title{
+    font-size: 20px;
+    margin-top: 0px;
+    color: rgba(59, 136, 59, 0.651);
+}
+.info-label{
+    color:rgba(7, 78, 7, 0.562);
+    font-size: 16px;
+    margin: 10px 10px 10px 10px;
+}
+.matdiv-color{
+    background-color:rgba(59, 136, 59, 0.651);
+}
+.abstract-art{
+    position: absolute;
+    margin-left: 65%;
+    max-width: 150%;
+    max-height: 150%;
+}
+.main-logo{
+    margin-left: 1%;
+    margin-top: -5%;
+    max-width: 50%;
+    max-height: 40%;
+    margin-bottom: 60%;
+}
+.row{
+    display:inline-flex;
+}

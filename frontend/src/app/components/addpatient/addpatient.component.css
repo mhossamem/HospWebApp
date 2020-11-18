@@ -1,0 +1,24 @@
+.create-form {
+    width: 100%;
+    
+}
+.inputfield {
+    width:100%;
+}
+.mainbtn {
+    font-family: "Roboto", sans-serif;
+  text-transform: uppercase;
+  outline: 0;
+  background: #428044;
+  width: 10%;
+  border: 0;
+  padding: 15px;
+  color: hsl(#ffffffad);
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.mainbtn:enabled:hover {
+    background: #49af4e;
+}

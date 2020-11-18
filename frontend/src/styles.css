@@ -1,0 +1,97 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.red-snackbar {
+    background-color: rgba(233, 10, 10, 0.781);
+}
+.green-snackbar {
+    background-color: rgba(41, 196, 41, 0.692);
+}
+.input-border {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f265;
+    width: 100%;
+    border: 0;
+    margin: 0 0 10px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+    border-radius: 10px;
+}
+.input-form{
+    width:auto;
+    display: block;
+}
+.shadow{
+    margin-top: 50px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.main-btn{
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    display: block;
+    outline: 0;
+    background: #068355;
+    color: white;
+    width: 30%;
+    border: 0;
+    margin-right: 20px;
+    color: hsl(#ffffffad);
+    font-size: 10px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+.main-btn:enabled:hover {
+    background: #078f5d;
+}
+.main-btn:disabled {
+    background: #044d3291;
+    color: #707070;
+}
+
+.outer {
+    display: table;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+  
+  .middle {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  
+  .inner {
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    /*whatever width you want*/
+  }
+.ablogo{
+    width:300 px;
+    height: 150px;
+}
+.minlogo{
+    width: 270px;
+    height: 200px;
+    margin:auto;
+}
+.visionlogo{
+    width: 170px;
+    height: 110px;
+    margin:auto;
+}
+.txtlogo{
+    width:300px;
+    height: 60px;
+    margin:auto;
+    
+    text-align: center;
+}

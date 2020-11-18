@@ -1,0 +1,12 @@
+<div class= "d-flex justify-content-center shadow rounded form input-form outer">
+        <form [formGroup]="loginForm" class="p-2">
+            <mat-form-field class="input-border middle login-input p-1">
+                <input matInput placeholder="Email" formControlName="Email" #Email>
+            </mat-form-field>
+            <br>
+            <mat-form-field class ="input-border middle login-input p-1">
+                <input matInput placeholder="Password" formControlName="Password" #Password>
+            </mat-form-field>
+            <button class="main-btn login-btn middle" type="button" mat-button (click)="loginUser()">Login</button>
+        </form>
+</div>
